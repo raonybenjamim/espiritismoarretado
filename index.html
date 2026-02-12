@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Base de referências: Espiritismo Arretado</title>
+    <style>
+      :root {
+        --bg-page: #f5f5f7;
+        --bg-surface: #ffffff;
+        --bg-soft: #f9fafb;
+        --border-subtle: #e5e7eb;
+        --border-strong: #d1d5db;
+        --accent: #7c3aed;
+        --accent-soft: #ede9fe;
+        --accent-soft-border: #ddd6fe;
+        --accent-strong: #5b21b6;
+        --text-main: #111827;
+        --text-muted: #4b5563;
+        --text-soft: #6b7280;
+        --text-label: #6b7280;
+        --text-code: #111827;
+        --error-bg: #fef2f2;
+        --error-border: #fecaca;
+        --error-text: #b91c1c;
+        --radius-lg: 18px;
+        --radius-md: 12px;
+        --radius-pill: 999px;
+        --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+        --transition-fast: 150ms ease-out;
+        --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: var(--font-sans);
+        background: radial-gradient(circle at top, #ede9fe 0, #f5f5f7 40%, #f3f4f6 100%);
+        color: var(--text-main);
+        min-height: 100%;
+      }
+
+      body {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      .app-shell {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding: 24px 16px 32px;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 880px;
+        background: var(--bg-surface);
+        border-radius: 24px;
+        border: 1px solid #e0e7ff;
+        box-shadow: var(--shadow-soft);
+        padding: 20px 18px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      @media (min-width: 720px) {
+        .app-shell {
+          padding: 40px 24px 48px;
+        }
+
+        .app {
+          padding: 26px 26px 26px;
+          gap: 22px;
+        }
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .brand-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 10px 4px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--accent-soft-border);
+        background: var(--accent-soft);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .brand-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.4);
+      }
+
+      .brand-title {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-main);
+      }
+
+      .brand-subtitle {
+        font-size: 13px;
+        color: var(--text-soft);
+      }
+
+      .usage-hint {
+        font-size: 11px;
+        color: var(--text-soft);
+        max-width: 230px;
+        line-height: 1.4;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px dashed var(--border-subtle);
+        background: #f9fafb;
+      }
+
+      .usage-hint strong {
+        color: var(--accent-strong);
+      }
+
+      .main {
+        display: grid;
+        grid-template-columns: minmax(0, 1.6fr);
+        gap: 14px;
+      }
+
+      @media (min-width: 880px) {
+        .main {
+          grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+          gap: 22px;
+        }
+      }
+
+      .search-panel {
+        background: var(--bg-soft);
+        border-radius: var(--radius-lg);
+        padding: 18px 16px 16px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .search-panel-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .search-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .search-title {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+      }
+
+      .search-description {
+        font-size: 13px;
+        color: var(--text-soft);
+      }
+
+      .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .input-row {
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .input-wrapper {
+        position: relative;
+        flex: 1;
+      }
+
+      .input-label {
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--text-label);
+        pointer-events: none;
+      }
+
+      #refCodeInput {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: #ffffff;
+        color: var(--text-main);
+        padding: 22px 40px 9px 12px;
+        font-size: 14px;
+        outline: none;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      #refCodeInput::placeholder {
+        color: #9ca3af;
+      }
+
+      #refCodeInput:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.25);
+        background: #ffffff;
+        transform: translateY(-0.5px);
+      }
+
+      .input-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-6px);
+        width: 22px;
+        height: 22px;
+        border-radius: 999px;
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #6b7280;
+        pointer-events: none;
+      }
+
+      .input-icon span {
+        font-size: 10px;
+      }
+
+      .search-button {
+        min-width: 96px;
+        border-radius: 12px;
+        border: none;
+        background: var(--accent);
+        color: white;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 0 16px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        box-shadow: 0 8px 18px rgba(124, 58, 237, 0.25);
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast),
+          filter var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+
+      .search-button span {
+        font-size: 11px;
+      }
+
+      .search-button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.02);
+        background-color: var(--accent-strong);
+        box-shadow: 0 10px 22px rgba(124, 58, 237, 0.3);
+      }
+
+      .search-button:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 14px rgba(124, 58, 237, 0.22);
+      }
+
+      .search-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .search-tip {
+        font-size: 12px;
+        color: var(--text-soft);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .search-tip-key {
+        padding: 2px 7px;
+        border-radius: 7px;
+        border: 1px solid #e5e7eb;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-label);
+        background: #ffffff;
+      }
+
+      .search-tip-example {
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 11px;
+        padding: 1px 6px;
+        border-radius: 999px;
+        background: #f3e8ff;
+        border: 1px solid #e0e7ff;
+        color: var(--accent-strong);
+      }
+
+      .last-updated {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .last-updated span {
+        color: var(--accent-strong);
+      }
+
+      .latest-panel {
+        background: #ffffff;
+        border-radius: var(--radius-lg);
+        padding: 15px 14px 14px;
+        border: 1px solid var(--border-subtle);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .latest-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .latest-title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .latest-badge {
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        border: 1px solid var(--accent-soft-border);
+        color: var(--accent-strong);
+      }
+
+      .latest-subtitle {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .latest-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 4px;
+      }
+
+      .latest-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        font-size: 11px;
+        cursor: pointer;
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast),
+          border-color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .latest-pill-code {
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 11px;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #ede9fe;
+        border: 1px solid #c7d2fe;
+        color: var(--text-code);
+      }
+
+      .latest-pill-title {
+        color: var(--text-main);
+      }
+
+      .latest-pill:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(148, 163, 184, 0.22);
+        border-color: #c7d2fe;
+        background: #ffffff;
+      }
+
+      .latest-pill:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 14px rgba(148, 163, 184, 0.18);
+      }
+
+      .results-panel {
+        background: var(--bg-soft);
+        border-radius: var(--radius-lg);
+        padding: 16px 15px 16px;
+        border: 1px solid var(--border-subtle);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 120px;
+      }
+
+      @media (min-width: 880px) {
+        .results-panel {
+          padding: 16px 16px 16px;
+        }
+      }
+
+      .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .results-title {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .results-hint {
+        font-size: 11px;
+        color: var(--text-soft);
+        text-align: right;
+      }
+
+      .result-empty {
+        font-size: 12px;
+        color: var(--text-soft);
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px dashed var(--border-subtle);
+        padding: 10px 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .result-empty-icon {
+        width: 16px;
+        height: 16px;
+        border-radius: 999px;
+        border: 1px solid #d1d5db;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #6b7280;
+      }
+
+      .result-card {
+        background: #ffffff;
+        border-radius: 14px;
+        border: 1px solid var(--border-subtle);
+        padding: 12px 12px 11px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        animation: fadeIn 180ms ease-out;
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .result-code {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--text-soft);
+      }
+
+      .result-code-tag {
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 11px;
+        color: var(--text-code);
+      }
+
+      .result-title {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        color: var(--text-main);
+      }
+
+      .result-meta {
+        font-size: 11px;
+        color: var(--text-soft);
+      }
+
+      .result-link-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .result-link {
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+        color: #ffffff;
+        background: var(--accent);
+        box-shadow: 0 8px 18px rgba(124, 58, 237, 0.25);
+        transition:
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast),
+          filter var(--transition-fast),
+          background-color var(--transition-fast);
+      }
+
+      .result-link span {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .result-link:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.02);
+        background-color: var(--accent-strong);
+        box-shadow: 0 10px 22px rgba(124, 58, 237, 0.3);
+      }
+
+      .result-link:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 14px rgba(124, 58, 237, 0.22);
+      }
+
+      .result-link-url {
+        font-size: 11px;
+        color: var(--text-soft);
+        word-break: break-all;
+      }
+
+      .result-footnote {
+        font-size: 10px;
+        color: var(--text-soft);
+      }
+
+      .result-footnote strong {
+        color: var(--accent-strong);
+      }
+
+      .result-not-found {
+        font-size: 12px;
+        color: var(--error-text);
+        background: var(--error-bg);
+        border-radius: 12px;
+        border: 1px solid var(--error-border);
+        padding: 9px 10px 9px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .result-not-found strong {
+        font-weight: 600;
+      }
+
+      .result-not-found span {
+        font-size: 11px;
+        opacity: 0.9;
+      }
+
+      .result-not-found-code {
+        font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        font-size: 11px;
+        padding: 1px 6px;
+        border-radius: 999px;
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        color: var(--error-text);
+      }
+
+      .footer {
+        font-size: 10px;
+        color: var(--text-soft);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .footer span {
+        white-space: nowrap;
+      }
+
+      .footer small {
+        font-size: 10px;
+      }
+
+      .footer-pill {
+        padding: 3px 9px;
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        background: #f9fafb;
+        color: var(--text-soft);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(3px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .search-title {
+          font-size: 18px;
+        }
+
+        .app {
+          border-radius: 0;
+          box-shadow: none;
+          border-left: none;
+          border-right: none;
+        }
+
+        .search-panel {
+          padding: 16px 12px 14px;
+        }
+
+        .results-panel {
+          padding: 14px 12px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="app">
+        <header class="app-header">
+          <div class="brand">
+            <div class="brand-label">
+              <span class="brand-dot"></span>
+              <span>Base de referências</span>
+            </div>
+            <div class="brand-title">Espiritismo Arretado</div>
+            <div class="brand-subtitle">
+              Encontre rapidamente o conteúdo associado a cada código de referência.
+            </div>
+          </div>
+          <div class="usage-hint">
+            Pensado para <strong>consulta rápida</strong>: digite o código, pressione
+            <strong>Enter</strong> (ou clique em "Buscar") e abra o link da referência.
+          </div>
+        </header>
+
+        <main class="main">
+          <section class="search-panel" aria-label="Busca por código de referência">
+            <div class="search-panel-inner">
+              <div class="search-heading">
+                <h1 class="search-title">Busque por um código de referência</h1>
+                <p class="search-description">
+                  Centralize aqui os códigos que você já usa no dia a dia. A
+                  pesquisa é direta: <strong>um código leva a um link</strong>.
+                </p>
+              </div>
+
+              <form class="search-form" id="searchForm">
+                <div class="input-row">
+                  <div class="input-wrapper">
+                    <label class="input-label" for="refCodeInput">Código de referência</label>
+                    <input
+                      id="refCodeInput"
+                      name="refCode"
+                      type="text"
+                      autocomplete="off"
+                      inputmode="text"
+                      placeholder="Ex.: ESTUDO-001, AULA-INTRO, LIVRO-BASE..."
+                      aria-describedby="searchHint"
+                    />
+                    <div class="input-icon" aria-hidden="true">
+                      <span>⌕</span>
+                    </div>
+                  </div>
+                  <button type="submit" class="search-button">
+                    <span>Buscar</span>
+                  </button>
+                </div>
+
+                <div class="search-meta">
+                  <div class="search-tip" id="searchHint">
+                    <span class="search-tip-key">Dica</span>
+                    <span>
+                      Busque pelo código completo. Exemplo:
+                      <span class="search-tip-example">ESTUDO-001</span>
+                    </span>
+                  </div>
+                  <div class="last-updated" id="lastUpdatedLabel">
+                    Últimas referências carregadas <span>agora</span>.
+                  </div>
+                </div>
+              </form>
+
+              <section
+                class="latest-panel"
+                aria-label="Últimas referências adicionadas"
+              >
+                <div class="latest-header">
+                  <div class="latest-title">
+                    Últimas adicionadas
+                    <span class="latest-badge">Atalho rápido</span>
+                  </div>
+                  <div class="latest-subtitle">
+                    Toque em um código para preencher automaticamente a busca.
+                  </div>
+                </div>
+                <div class="latest-list" id="latestList">
+                  <!-- Preenchido via JavaScript -->
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section class="results-panel" aria-label="Resultado da busca">
+            <div class="results-header">
+              <div class="results-title">Resultado</div>
+              <div class="results-hint">
+                Mostra o título e o link da referência quando o código é encontrado.
+              </div>
+            </div>
+
+            <div id="resultContainer">
+              <div class="result-empty" id="emptyState">
+                <div class="result-empty-icon">?</div>
+                <div>
+                  Digite um código acima para ver a referência associada.
+                  <br />
+                  Você também pode começar pelas <strong>últimas adicionadas</strong> logo abaixo da busca.
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <div>
+            <span>Base de referências: Espiritismo Arretado</span>
+          </div>
+          <div class="footer-pill">
+            <small>
+              Interface pensada para ser usada sem manual: experimente digitar o que
+              você já usa.
+            </small>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // Mapa interno de referências.
+      // Ajuste, adicione ou remova entradas conforme sua necessidade.
+      // Cada entrada deve seguir o formato:
+      // { code: "CÓDIGO", title: "Título da referência", url: "https://link-da-referencia" }
+
+      const referenceData = [
+        {
+          code: "1DGL9",
+          title: "Carrossel sobre Poligamia ",
+          url: "https://drive.google.com/drive/folders/1rXoV8pgtw2FLmP6hrCvzAXLDQw3n0gv1?usp=drive_link",
+        },
+        {
+          code: "3BZU9L",
+          title: "Dica de material de estudo - traduções do Cláudio Damasceno",
+          url: "https://drive.google.com/drive/folders/1k80_achNty50pROYbLc-iWhMrvgtlWpK?usp=drive_link",
+        },
+        {
+          code: "7XY7A",
+          title: "Os limites da concordância universal",
+          url: "https://drive.google.com/drive/folders/1U8R20Iia-MaOzv9wugsMVBVBvOLTTrVl?usp=drive_link",
+        },
+        {
+          code: "DHWW7",
+          title: "Uma reflexão sobre o Carnaval",
+          url: "https://drive.google.com/drive/folders/1g7AOWmA-WDzE94EhCcu3ClndFVOqcj9q?usp=drive_link",
+        },
+        {
+          code: "PBBI1",
+          title: "Migrações planetárias e o inchaço da população",
+          url: "https://drive.google.com/drive/folders/1HWgXfIuyEXuj-KdGT2ngPSQUVGb2MCls?usp=drive_link",
+        },
+      ];
+
+      const searchForm = document.getElementById("searchForm");
+      const refCodeInput = document.getElementById("refCodeInput");
+      const resultContainer = document.getElementById("resultContainer");
+      const latestList = document.getElementById("latestList");
+      const emptyState = document.getElementById("emptyState");
+
+      function normalizeCode(rawCode) {
+        if (!rawCode) return "";
+        return rawCode.trim().toUpperCase();
+      }
+
+      function getLastEntries(limit = 4) {
+        if (!Array.isArray(referenceData) || referenceData.length === 0) {
+          return [];
+        }
+        const startIndex = Math.max(referenceData.length - limit, 0);
+        return referenceData.slice(startIndex).reverse(); // mais recentes primeiro
+      }
+
+      function renderLatest() {
+        latestList.innerHTML = "";
+        const latest = getLastEntries(4);
+
+        if (latest.length === 0) {
+          const span = document.createElement("span");
+          span.style.fontSize = "11px";
+          span.style.color = "rgba(199,210,254,0.95)";
+          span.textContent =
+            "Nenhuma referência cadastrada ainda. Adicione entradas no mapa de dados em JavaScript.";
+          latestList.appendChild(span);
+          return;
+        }
+
+        latest.forEach((entry) => {
+          const pill = document.createElement("button");
+          pill.type = "button";
+          pill.className = "latest-pill";
+          pill.setAttribute(
+            "aria-label",
+            `Buscar referência para o código ${entry.code}`
+          );
+
+          const codeEl = document.createElement("span");
+          codeEl.className = "latest-pill-code";
+          codeEl.textContent = entry.code;
+
+          const titleEl = document.createElement("span");
+          titleEl.className = "latest-pill-title";
+          titleEl.textContent = entry.title;
+
+          pill.appendChild(codeEl);
+          pill.appendChild(titleEl);
+          pill.addEventListener("click", () => {
+            refCodeInput.value = entry.code;
+            refCodeInput.focus();
+            handleSearch(entry.code);
+          });
+
+          latestList.appendChild(pill);
+        });
+      }
+
+      function renderEmptyState() {
+        resultContainer.innerHTML = "";
+        resultContainer.appendChild(emptyState);
+        emptyState.style.display = "flex";
+      }
+
+      function renderNotFound(code) {
+        const normalized = normalizeCode(code);
+        resultContainer.innerHTML = "";
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "result-not-found";
+
+        const mainLine = document.createElement("div");
+        mainLine.innerHTML =
+          'Nenhuma referência encontrada para o código <span class="result-not-found-code"></span>.';
+
+        const codeSpan = mainLine.querySelector(".result-not-found-code");
+        codeSpan.textContent = normalized || "(vazio)";
+
+        const hint = document.createElement("span");
+        hint.textContent =
+          "Confira se o código está completo e sem espaços extras. Se acabou de cadastrar, verifique se ele foi incluído corretamente no mapa de dados.";
+
+        wrapper.appendChild(mainLine);
+        wrapper.appendChild(hint);
+
+        resultContainer.appendChild(wrapper);
+      }
+
+      function renderResult(entry) {
+        resultContainer.innerHTML = "";
+        emptyState.style.display = "none";
+
+        const card = document.createElement("article");
+        card.className = "result-card";
+
+        const header = document.createElement("div");
+        header.className = "result-header";
+
+        const codeBlock = document.createElement("div");
+        codeBlock.className = "result-code";
+
+        const codeTag = document.createElement("span");
+        codeTag.className = "result-code-tag";
+        codeTag.textContent = entry.code;
+
+        codeBlock.appendChild(codeTag);
+
+        const title = document.createElement("h2");
+        title.className = "result-title";
+        title.textContent = entry.title;
+
+        header.appendChild(codeBlock);
+        header.appendChild(title);
+
+        const linkRow = document.createElement("div");
+        linkRow.className = "result-link-row";
+
+        const link = document.createElement("a");
+        link.className = "result-link";
+        link.href = entry.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.innerHTML = '<span>Abrir referência</span>';
+
+        const linkUrl = document.createElement("span");
+        linkUrl.className = "result-link-url";
+        linkUrl.textContent = entry.url;
+
+        linkRow.appendChild(link);
+        linkRow.appendChild(linkUrl);
+
+        card.appendChild(header);
+        card.appendChild(linkRow);
+
+        resultContainer.appendChild(card);
+      }
+
+      function findEntryByCode(rawCode) {
+        const code = normalizeCode(rawCode);
+        if (!code) return null;
+
+        return referenceData.find(
+          (item) => normalizeCode(item.code) === code
+        );
+      }
+
+      function handleSearch(rawCode) {
+        const value = rawCode ?? refCodeInput.value;
+        const entry = findEntryByCode(value);
+
+        if (!value || !normalizeCode(value)) {
+          renderEmptyState();
+          return;
+        }
+
+        if (!entry) {
+          renderNotFound(value);
+          return;
+        }
+
+        renderResult(entry);
+      }
+
+      searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        handleSearch();
+      });
+
+      // Pressionar Enter dentro do campo também aciona a busca (reforço de UX).
+      refCodeInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          handleSearch();
+        }
+      });
+
+      // Inicialização
+      renderLatest();
+      renderEmptyState();
+    </script>
+  </body>
+</html>
+
