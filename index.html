@@ -85,10 +85,8 @@
 
       .app-header {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         gap: 12px;
-        flex-wrap: wrap;
       }
 
       .brand {
@@ -365,7 +363,6 @@
 
       .latest-header {
         display: flex;
-        justify-content: space-between;
         align-items: baseline;
         gap: 8px;
       }
@@ -464,7 +461,6 @@
 
       .results-header {
         display: flex;
-        justify-content: space-between;
         align-items: baseline;
         gap: 8px;
       }
@@ -651,10 +647,8 @@
         font-size: 10px;
         color: var(--text-soft);
         display: flex;
-        justify-content: space-between;
         align-items: center;
         gap: 8px;
-        flex-wrap: wrap;
       }
 
       .footer span {
@@ -720,10 +714,6 @@
               Encontre rapidamente o conteúdo associado a cada código de referência.
             </div>
           </div>
-          <div class="usage-hint">
-            Pensado para <strong>consulta rápida</strong>: digite o código, pressione
-            <strong>Enter</strong> (ou clique em "Buscar") e abra o link da referência.
-          </div>
         </header>
 
         <main class="main">
@@ -731,10 +721,6 @@
             <div class="search-panel-inner">
               <div class="search-heading">
                 <h1 class="search-title">Busque por um código de referência</h1>
-                <p class="search-description">
-                  Centralize aqui os códigos que você já usa no dia a dia. A
-                  pesquisa é direta: <strong>um código leva a um link</strong>.
-                </p>
               </div>
 
               <form class="search-form" id="searchForm">
@@ -780,10 +766,6 @@
                 <div class="latest-header">
                   <div class="latest-title">
                     Últimas adicionadas
-                    <span class="latest-badge">Atalho rápido</span>
-                  </div>
-                  <div class="latest-subtitle">
-                    Toque em um código para preencher automaticamente a busca.
                   </div>
                 </div>
                 <div class="latest-list" id="latestList">
@@ -796,9 +778,6 @@
           <section class="results-panel" aria-label="Resultado da busca">
             <div class="results-header">
               <div class="results-title">Resultado</div>
-              <div class="results-hint">
-                Mostra o título e o link da referência quando o código é encontrado.
-              </div>
             </div>
 
             <div id="resultContainer">
@@ -817,12 +796,6 @@
         <footer class="footer">
           <div>
             <span>Base de referências: Espiritismo Arretado</span>
-          </div>
-          <div class="footer-pill">
-            <small>
-              Interface pensada para ser usada sem manual: experimente digitar o que
-              você já usa.
-            </small>
           </div>
         </footer>
       </div>
